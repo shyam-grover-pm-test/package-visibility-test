@@ -40,7 +40,7 @@ jobs:
           echo "//npm.pkg.github.com/:_authToken=${{ matrix.token }}" > .npmrc
           
           echo { > package.json
-          echo " "  \"name\": \"@shyam-grover-pm-test/GH_TOKEN-$(date +%s)\", >> package.json
+          echo " "  \"name\": \"@shyam-grover-pm-test/gh_token-$(date +%s)\", >> package.json
           echo " "  \"version\": \"1.0.0\", >> package.json
           echo " "  \"publishConfig\": { >> package.json
           echo "   "    \"registry\": \"https://npm.pkg.github.com/shyam-grover-pm-test\" >> package.json

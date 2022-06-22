@@ -40,7 +40,7 @@ jobs:
           echo "//npm.pkg.github.com/:_authToken=${{ matrix.token }}" > .npmrc
           
           echo { > package.json
-          echo " "  \"name\": \"@shyam-grover-pm-test/private-$(date +%s)-PAT\", >> package.json
+          echo " "  \"name\": \"@shyam-grover-pm-test/private-$(date +%s)-pat\", >> package.json
           echo " "  \"version\": \"1.0.0\", >> package.json
           echo " "  \"publishConfig\": { >> package.json
           echo "   "    \"registry\": \"https://npm.pkg.github.com/shyam-grover-pm-test\" >> package.json
@@ -60,7 +60,7 @@ jobs:
           echo "//npm.pkg.github.com/:_authToken=${{ matrix.token }}" > .npmrc
 
           echo { > package.json
-          echo " "  \"name\": \"@shyam-grover-pm-test/internal-$(date +%s)-PAT\", >> package.json
+          echo " "  \"name\": \"@shyam-grover-pm-test/internal-$(date +%s)-pat\", >> package.json
           echo " "  \"version\": \"1.0.0\", >> package.json
           echo " "  \"publishConfig\": { >> package.json
           echo "   "    \"registry\": \"https://npm.pkg.github.com/shyam-grover-pm-test\" >> package.json
@@ -80,7 +80,7 @@ jobs:
           echo "//npm.pkg.github.com/:_authToken=${{ matrix.token }}" > .npmrc
 
           echo { > package.json
-          echo " "  \"name\": \"@shyam-grover-pm-test/public-$(date +%s)-PAT\", >> package.json
+          echo " "  \"name\": \"@shyam-grover-pm-test/public-$(date +%s)-pat\", >> package.json
           echo " "  \"version\": \"1.0.0\", >> package.json
           echo " "  \"publishConfig\": { >> package.json
           echo "   "    \"registry\": \"https://npm.pkg.github.com/shyam-grover-pm-test\" >> package.json
