@@ -40,15 +40,15 @@ jobs:
         run: |
           echo "//npm.pkg.github.com/:_authToken=${{ matrix.token }}" > .npmrc
           
-          echo "{" > package.json
-          echo "  \"name\": \"@shyam-grover-pm-test/private-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}\"," >> package.json
-          echo "  \"version\": 1.0.0," >> package.json
-          echo "  \"publishConfig\": {" >> package.json
-          echo "    \"registry\": \"https://npm.pkg.github.com/shyam-grover-pm-test\"" >> package.json
-          echo "  }," >> package.json
-          echo "  \"repository\": {" >> package.json
-          echo "    \"url\": \"git://github.com/shyam-grover-pm-test/pkg-private.git\"" >> package.json
-          echo "  }" >> package.json
+          echo { > package.json
+          echo "  "  \"name\": \"@shyam-grover-pm-test/private-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}\", >> package.json
+          echo "  "  \"version\": 1.0.0, >> package.json
+          echo "  "  \"publishConfig\": { >> package.json
+          echo "    "    \"registry\": \"https://npm.pkg.github.com/shyam-grover-pm-test\" >> package.json
+          echo "  "  }, >> package.json
+          echo "  "  \"repository\": { >> package.json
+          echo "    "    \"url\": \"git://github.com/shyam-grover-pm-test/pkg-private.git\" >> package.json
+          echo "   }" >> package.json
           echo "}" >> package.json
 
           npm publish --registry=https://npm.pkg.github.com
@@ -60,15 +60,15 @@ jobs:
         run: |
           echo "//npm.pkg.github.com/:_authToken=${{ matrix.token }}" > .npmrc
 
-          echo "{" > package.json
-          echo "  \"name\": \"@shyam-grover-pm-test/internal-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}\"," >> package.json
-          echo "  \"version\": 1.0.0," >> package.json
-          echo "  \"publishConfig\": {" >> package.json
-          echo "    \"registry\": \"https://npm.pkg.github.com/shyam-grover-pm-test\"" >> package.json
-          echo "  }," >> package.json
-          echo "  \"repository\": {" >> package.json
-          echo "    \"url\": \"git://github.com/shyam-grover-pm-test/pkg-internal.git\"" >> package.json
-          echo "  }" >> package.json
+          echo { > package.json
+          echo "  "  \"name\": \"@shyam-grover-pm-test/internal-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}\", >> package.json
+          echo "  "  \"version\": 1.0.0, >> package.json
+          echo "  "  \"publishConfig\": { >> package.json
+          echo "    "    \"registry\": \"https://npm.pkg.github.com/shyam-grover-pm-test\" >> package.json
+          echo "  "  }, >> package.json
+          echo "  "  \"repository\": { >> package.json
+          echo "    "    \"url\": \"git://github.com/shyam-grover-pm-test/pkg-internal.git\" >> package.json
+          echo "   }" >> package.json
           echo "}" >> package.json
 
           npm publish --registry=https://npm.pkg.github.com
@@ -77,19 +77,18 @@ jobs:
         id: npm-publish-package-to-public-repo
         if: always()
         continue-on-error: true
-        working-directory: ./public
         run: |
           echo "//npm.pkg.github.com/:_authToken=${{ matrix.token }}" > .npmrc
-          
-          echo "{" > package.json
-          echo "  \"name\": \"@shyam-grover-pm-test/public-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}\"," >> package.json
-          echo "  \"version\": 1.0.0," >> package.json
-          echo "  \"publishConfig\": {" >> package.json
-          echo "    \"registry\": \"https://npm.pkg.github.com/shyam-grover-pm-test\"" >> package.json
-          echo "  }," >> package.json
-          echo "  \"repository\": {" >> package.json
-          echo "    \"url\": \"git://github.com/shyam-grover-pm-test/pkg-public.git\"" >> package.json
-          echo "  }" >> package.json
+
+          echo { > package.json
+          echo "  "  \"name\": \"@shyam-grover-pm-test/public-${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}\", >> package.json
+          echo "  "  \"version\": 1.0.0, >> package.json
+          echo "  "  \"publishConfig\": { >> package.json
+          echo "    "    \"registry\": \"https://npm.pkg.github.com/shyam-grover-pm-test\" >> package.json
+          echo "  "  }, >> package.json
+          echo "  "  \"repository\": { >> package.json
+          echo "    "    \"url\": \"git://github.com/shyam-grover-pm-test/pkg-public.git\" >> package.json
+          echo "   }" >> package.json
           echo "}" >> package.json
 
           npm publish --registry=https://npm.pkg.github.com                    
