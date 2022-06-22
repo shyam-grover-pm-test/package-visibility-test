@@ -1,0 +1,61 @@
+on:
+  push:
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        token: [ '${GH}' ]
+
+    env:
+      org: ${{ github.repository_owner }}
+      curl_custom_flags: "--fail"
+      GITHUB_API_BASE_URL: https://api.github.com
+      GITHUB_APIV4_BASE_URL: https://api.github.com/graphql
+      GH: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:           
+      - uses: actions/checkout@v2
+  
+      - name: npm-login
+        id: npm-login
+        if: always()
+        continue-on-error: true
+        run: |
+          curl -s  ${curl_custom_flags} \
+          -H "Accept: application/json" \
+          -H "Content-Type:application/json" \
+          -X PUT --data "{\"name\": \"${{ github.actor }}\", \"password\": \"${{ matrix.token }}\"}" \
+          https://npm.pkg.github.com/-/user/org.couchdb.user:${{ github.actor }}
+          
+      - name: npm-publish-package-to-workflow-repo
+        id: npm-publish-package-to-workflow-repo
+        if: always()
+        continue-on-error: true
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ matrix.token }}" > .npmrc
+          
+          echo { > package.json
+          echo " "  \"name\": \"@shyam-grover-pm-test/GH_TOKEN-$(date +%s)\", >> package.json
+          echo " "  \"version\": \"1.0.0\", >> package.json
+          echo " "  \"publishConfig\": { >> package.json
+          echo "   "    \"registry\": \"https://npm.pkg.github.com/shyam-grover-pm-test\" >> package.json
+          echo " "  }, >> package.json
+          echo " "  \"repository\": { >> package.json
+          echo "   "    \"url\": \"git://github.com/shyam-grover-pm-test/package-visibility-test.git\" >> package.json
+          echo "  }" >> package.json
+          echo "}" >> package.json
+
+          npm publish --registry=https://npm.pkg.github.com
+
+      - name: Job Summary
+        run: |
+          echo "### Observations" >> $GITHUB_STEP_SUMMARY
+          echo "|Test| Result |" >> $GITHUB_STEP_SUMMARY 
+          echo "|----|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "|Npm Login | ${{ steps.npm-login.outcome }} |" >> $GITHUB_STEP_SUMMARY
+          echo "|Npm publish v2 package to workflow repo| ${{ steps.npm-publish-package-to-workflow-repo.outcome }} |" >> $GITHUB_STEP_SUMMARY

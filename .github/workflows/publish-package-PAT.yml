@@ -9,14 +9,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        token: [ '${PAT}', '${GH}' ]
+        token: [ '${PAT}' ]
 
     env:
       org: ${{ github.repository_owner }}
       curl_custom_flags: "--fail"
       GITHUB_API_BASE_URL: https://api.github.com
       GITHUB_APIV4_BASE_URL: https://api.github.com/graphql
-      GH: ${{ secrets.GITHUB_TOKEN }}
       PAT: ${{secrets.READ_WRITE_PACKAGES_TOKEN}}
 
     steps:           
@@ -41,14 +40,14 @@ jobs:
           echo "//npm.pkg.github.com/:_authToken=${{ matrix.token }}" > .npmrc
           
           echo { > package.json
-          echo "  "  \"name\": \"@shyam-grover-pm-test/private-$(date +%s)\", >> package.json
-          echo "  "  \"version\": \"1.0.0\", >> package.json
-          echo "  "  \"publishConfig\": { >> package.json
-          echo "    "    \"registry\": \"https://npm.pkg.github.com/shyam-grover-pm-test\" >> package.json
-          echo "  "  }, >> package.json
-          echo "  "  \"repository\": { >> package.json
-          echo "    "    \"url\": \"git://github.com/shyam-grover-pm-test/private-repository.git\" >> package.json
-          echo "   }" >> package.json
+          echo " "  \"name\": \"@shyam-grover-pm-test/private-$(date +%s)-PAT\", >> package.json
+          echo " "  \"version\": \"1.0.0\", >> package.json
+          echo " "  \"publishConfig\": { >> package.json
+          echo "   "    \"registry\": \"https://npm.pkg.github.com/shyam-grover-pm-test\" >> package.json
+          echo " "  }, >> package.json
+          echo " "  \"repository\": { >> package.json
+          echo "   "    \"url\": \"git://github.com/shyam-grover-pm-test/private-repository.git\" >> package.json
+          echo "  }" >> package.json
           echo "}" >> package.json
 
           npm publish --registry=https://npm.pkg.github.com
@@ -61,14 +60,14 @@ jobs:
           echo "//npm.pkg.github.com/:_authToken=${{ matrix.token }}" > .npmrc
 
           echo { > package.json
-          echo "  "  \"name\": \"@shyam-grover-pm-test/internal-$(date +%s)\", >> package.json
-          echo "  "  \"version\": \"1.0.0\", >> package.json
-          echo "  "  \"publishConfig\": { >> package.json
-          echo "    "    \"registry\": \"https://npm.pkg.github.com/shyam-grover-pm-test\" >> package.json
-          echo "  "  }, >> package.json
-          echo "  "  \"repository\": { >> package.json
-          echo "    "    \"url\": \"git://github.com/shyam-grover-pm-test/internal-repository.git\" >> package.json
-          echo "   }" >> package.json
+          echo " "  \"name\": \"@shyam-grover-pm-test/internal-$(date +%s)-PAT\", >> package.json
+          echo " "  \"version\": \"1.0.0\", >> package.json
+          echo " "  \"publishConfig\": { >> package.json
+          echo "   "    \"registry\": \"https://npm.pkg.github.com/shyam-grover-pm-test\" >> package.json
+          echo " "  }, >> package.json
+          echo " "  \"repository\": { >> package.json
+          echo "   "    \"url\": \"git://github.com/shyam-grover-pm-test/internal-repository.git\" >> package.json
+          echo "  }" >> package.json
           echo "}" >> package.json
 
           npm publish --registry=https://npm.pkg.github.com
@@ -81,14 +80,14 @@ jobs:
           echo "//npm.pkg.github.com/:_authToken=${{ matrix.token }}" > .npmrc
 
           echo { > package.json
-          echo "  "  \"name\": \"@shyam-grover-pm-test/public-$(date +%s)\", >> package.json
-          echo "  "  \"version\": \"1.0.0\", >> package.json
-          echo "  "  \"publishConfig\": { >> package.json
-          echo "    "    \"registry\": \"https://npm.pkg.github.com/shyam-grover-pm-test\" >> package.json
-          echo "  "  }, >> package.json
-          echo "  "  \"repository\": { >> package.json
-          echo "    "    \"url\": \"git://github.com/shyam-grover-pm-test/public-repository.git\" >> package.json
-          echo "   }" >> package.json
+          echo " "  \"name\": \"@shyam-grover-pm-test/public-$(date +%s)-PAT\", >> package.json
+          echo " "  \"version\": \"1.0.0\", >> package.json
+          echo " "  \"publishConfig\": { >> package.json
+          echo "   "    \"registry\": \"https://npm.pkg.github.com/shyam-grover-pm-test\" >> package.json
+          echo " "  }, >> package.json
+          echo " "  \"repository\": { >> package.json
+          echo "   "    \"url\": \"git://github.com/shyam-grover-pm-test/public-repository.git\" >> package.json
+          echo "  }" >> package.json
           echo "}" >> package.json
 
           npm publish --registry=https://npm.pkg.github.com                    
