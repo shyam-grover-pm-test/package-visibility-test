@@ -4,7 +4,7 @@ on:
   [workflow_dispatch]
 
 env:
-  IMAGE_NAME: hello-world-$(date +%s)
+  IMAGE_NAME: hello-world
 
 jobs:
   # Push image to GitHub Packages.
@@ -25,7 +25,7 @@ jobs:
 
       - name: Push image
         run: |
-          IMAGE_ID=ghcr.io/shyam-grover-pm-test/$IMAGE_NAME
+          IMAGE_ID=ghcr.io/shyam-grover-pm-test/$IMAGE_NAME-$(date +%s)
           VERSION=123
-          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+          docker tag $IMAGE_NAME-$(date +%s) $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
