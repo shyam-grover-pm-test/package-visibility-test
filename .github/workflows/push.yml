@@ -25,7 +25,7 @@ jobs:
 
       - name: Push image
         run: |
-          IMAGE_ID=ghcr.io/shyam-grover-pm-test/$IMAGE_NAME-$(date +%s)
+          IMAGE_ID=ghcr.io/shyam-grover-pm-test/$IMAGE_NAME
           VERSION=123
-          docker tag $IMAGE_NAME-$(date +%s) $IMAGE_ID:$VERSION
+          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
