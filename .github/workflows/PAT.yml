@@ -1,3 +1,5 @@
+name: PAT
+
 on:
   push:
   workflow_dispatch:
